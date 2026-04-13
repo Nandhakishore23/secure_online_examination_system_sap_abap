@@ -1,0 +1,31 @@
+unmanaged implementation in class zbp_i_exam_22ad070 unique;
+strict ( 2 );
+
+define behavior for Z_I_EXAM_22AD070 //alias <alias_name>
+//late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) exam_uuid;
+  association _Questions { create; }
+  action submitExam result [1] $self;
+
+  /* Add this line to force the UI to refresh after clicking Submit */
+  side effects { action submitExam affects $self; }
+}
+
+define behavior for Z_I_QUES_22AD070 //alias <alias_name>
+//late numbering
+lock dependent by _Exam
+authorization dependent by _Exam
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) ques_uuid, parent_uuid;
+  association _Exam;
+}

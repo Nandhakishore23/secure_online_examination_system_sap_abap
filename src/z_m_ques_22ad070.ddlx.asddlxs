@@ -1,0 +1,53 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Question',
+                typeNamePlural: 'Questions',
+                title: { type: #STANDARD, value: 'question_text' } } }
+annotate view Z_C_QUES_22AD070
+  with 
+{
+  @UI.facet: [
+    { id:              'QuestionDetails',
+      purpose:         #STANDARD,
+      type:            #IDENTIFICATION_REFERENCE,
+      label:           'Question Details',
+      position:        10 }
+  ]
+
+  @UI.hidden: true
+  ques_uuid;
+
+  @UI.hidden: true
+  parent_uuid;
+
+  @UI: { lineItem:       [ { position: 10, importance: #HIGH } ],
+         identification: [ { position: 10 } ] }
+  @EndUserText.label: 'Question Text'
+  @UI.multiLineText: true
+  question_text;
+
+  @UI: { lineItem:       [ { position: 20, importance: #MEDIUM } ],
+         identification: [ { position: 20 } ] }
+  @EndUserText.label: 'Option A'
+  option_a;
+
+  @UI: { lineItem:       [ { position: 30, importance: #MEDIUM } ],
+         identification: [ { position: 30 } ] }
+  @EndUserText.label: 'Option B'
+  option_b;
+
+  @UI: { lineItem:       [ { position: 40, importance: #MEDIUM } ],
+         identification: [ { position: 40 } ] }
+  @EndUserText.label: 'Option C'
+  option_c;
+
+  @UI: { lineItem:       [ { position: 50, importance: #MEDIUM } ],
+         identification: [ { position: 50 } ] }
+  @EndUserText.label: 'Option D'
+  option_d;
+
+  @UI: { lineItem:       [ { position: 60, importance: #HIGH } ],
+         identification: [ { position: 60 } ] }
+  @EndUserText.label: 'Correct Answer (A/B/C/D)'
+  correct_answer;
+}

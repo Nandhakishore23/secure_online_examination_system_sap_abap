@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Exam 22AD070'
+define service Z_UI_EXAM_22AD070 {
+  expose Z_C_EXAM_22AD070 as Exam;
+  expose Z_C_QUES_22AD070 as Question;
+}

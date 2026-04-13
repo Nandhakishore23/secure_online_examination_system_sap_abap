@@ -1,0 +1,89 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Exam',
+                typeNamePlural: 'Exams',
+                title: { type: #STANDARD, label: 'Exam', value: 'title' } } }
+annotate view Z_C_EXAM_22AD070
+  with 
+{
+  @UI.facet: [
+    /* 1. Header Information (Top part of the screen) */
+    { id:              'ExamHeader',
+      purpose:         #HEADER,
+      type:            #DATAPOINT_REFERENCE,
+      targetQualifier: 'StatusData',
+      position:        10 },
+
+    /* 2. General Information Group (Body) */
+    { id:              'GeneralInfo',
+      type:            #COLLECTION,
+      label:           'General Information',
+      position:        10 },
+      { id:              'ExamDetails',
+        purpose:         #STANDARD,
+        type:            #FIELDGROUP_REFERENCE,
+        parentId:        'GeneralInfo',
+        targetQualifier: 'GeneralData',
+        position:        10 },
+
+    /* 3. Administrative / Security Group (Body) */
+    { id:              'AdminInfo',
+      type:            #COLLECTION,
+      label:           'Audit Data',
+      position:        20 },
+      { id:              'AdminDetails',
+        purpose:         #STANDARD,
+        type:            #FIELDGROUP_REFERENCE,
+        parentId:        'AdminInfo',
+        targetQualifier: 'AdminData',
+        position:        10 },
+
+    /* 4. Questions List (Links the Child table into the Parent screen) */
+    { id:              'Questions',
+      purpose:         #STANDARD,
+      type:            #LINEITEM_REFERENCE,
+      label:           'Question Bank',
+      position:        30,
+      targetElement:   '_Questions'}
+  ]
+
+  @UI.hidden: true
+  exam_uuid;
+
+  @UI: { lineItem:       [ { position: 10, importance: #HIGH },
+                           { type: #FOR_ACTION, dataAction: 'submitExam', label: 'Submit Exam' } ],
+         selectionField: [ { position: 10 } ],
+         identification: [ { position: 10 },
+                           { type: #FOR_ACTION, dataAction: 'submitExam', label: 'Submit Exam' } ],
+         fieldGroup:     [ { qualifier: 'GeneralData', position: 10 } ] }
+  @EndUserText.label: 'Exam ID'
+  exam_id;
+
+  @UI: { lineItem:       [ { position: 20, importance: #HIGH } ],
+         fieldGroup:     [ { qualifier: 'GeneralData', position: 20 } ] }
+  @EndUserText.label: 'Exam Title'
+  title;
+
+  @UI: { lineItem:       [ { position: 30, importance: #MEDIUM } ],
+         fieldGroup:     [ { qualifier: 'GeneralData', position: 30 } ] }
+  @EndUserText.label: 'Duration (Mins)'
+  duration;
+
+  @UI: { lineItem:       [ { position: 40, importance: #HIGH } ],
+         selectionField: [ { position: 20 } ],
+         dataPoint:      { qualifier: 'StatusData', title: 'Status' },
+         fieldGroup:     [ { qualifier: 'GeneralData', position: 40 } ] }
+  @EndUserText.label: 'Status (O/C)'
+  status;
+
+  @UI: { fieldGroup:     [ { qualifier: 'AdminData', position: 10 } ] }
+  @EndUserText.label: 'Created By'
+  created_by;
+
+  @UI: { fieldGroup:     [ { qualifier: 'AdminData', position: 20 } ] }
+  @EndUserText.label: 'Created At'
+  created_at;
+
+  @UI.hidden: true
+  last_changed_at;
+}

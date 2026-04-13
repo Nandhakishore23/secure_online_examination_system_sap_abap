@@ -1,0 +1,20 @@
+projection;
+strict ( 2 );
+
+define behavior for Z_C_EXAM_22AD070 alias Exam
+{
+  use create;
+  use update;
+  use delete;
+  use action submitExam;
+  use association _Questions { create; }
+}
+
+define behavior for Z_C_QUES_22AD070 alias Question
+{
+  use update;
+  use delete;
+
+  use association _Exam;
+  field ( suppress ) correct_answer;
+}
